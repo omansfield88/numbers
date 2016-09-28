@@ -44,6 +44,7 @@ function drawBall(frameID, cx, cy, r){
 		.attr("offset", "0%");
 };
 
+
 function drawSlash(frameID, startCoOrdinates, endCoOrdinates){
 	var slash = frameID.append("polygon")
 				.attr("points", startCoOrdinates)
@@ -87,6 +88,20 @@ function drawLine(frameID, x1, y1, x2, y2, dashArray, dashOffset){
 
 
 
+function createOne(frameID){
+	// drawSlash(frameID,
+	// 		"125.8",
+	// 		"20 83.5",
+	// 		"95 127.2",
+	// 		"95 169.5",
+	// 		"20"
+	// 		);
+	drawLine(frameID,
+			"169.5", //x1
+			"20",    //y1
+			"169.5", //x2
+			"320");   //y2
+}
 
 
 function createFive(frameID){
@@ -103,6 +118,8 @@ function createFive(frameID){
 			"M71.9,132.6l54.5,0c51.6,0,93.4,41.8,93.4,93.4s-41.8,93.4-93.4,93.4s-93.4-41.8-93.4-93.4c0-6.4,0.6-12.6,1.9-18.7", //path coordinates
 			"830",  //dash array
 			"830"); //dash offset
+
+
 }
 
 
@@ -113,7 +130,7 @@ function createSeven(frameID){
 			"28");   //r
 
 	drawSlash(frameID, 
-			"63.8,319.5 232.8,20.5 189.2,20.5 20.2,319.5",  //coordinates start
+			"232,21.8 232.8,20.5 189.2,20.5 188.5,21.8",  //coordinates start
 			"63.8,319.5 232.8,20.5 189.2,20.5 20.2,319.5"); //coordinates end
 
 	drawLine(frameID,
@@ -124,22 +141,23 @@ function createSeven(frameID){
 			"147",   //dash array
 			"-147"   //dash offset
 			)
+
 }
 
 
-createFive(firstFrame);
-createSeven(secondFrame);
+createOne(firstFrame, function(){
+	setTimeout(function(){
+		frameID.remove(); 
+	}, 1500)
+	
+});
 
-
-
-
-
-
-
-
-
-
-
+createFive(secondFrame, function(){
+	setTimeout(function(){
+		frameID.remove();
+	}, 500)
+	
+});
 
 
 
