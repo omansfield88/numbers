@@ -123,6 +123,24 @@ function createFive(frameID){
 }
 
 
+function createThree(frameID){
+
+	drawBall(frameID, 
+			"81.261", //cx
+			"48.508",  //cy
+			"28.008");   //r
+	
+	drawSlash(frameID, 
+			"135.3,20.5 135,21 178.6,21 178.9,20.5",  //coordinates start
+			"135.3,20.5 71.9,132.7 115.5,132.7 178.9,20.5"); //coordinates end
+
+	drawPath(frameID, 
+			"M71.9,132.6l54.5,0c51.6,0,93.4,41.8,93.4,93.4s-41.8,93.4-93.4,93.4s-93.4-41.8-93.4-93.4c0-6.4,0.6-12.6,1.9-18.7", //path coordinates
+			"830",  //dash array
+			"830"); //dash offset
+
+}
+
 function createSeven(frameID){
 	drawBall(frameID, 
 			"88.5", //cx
@@ -145,7 +163,7 @@ function createSeven(frameID){
 }
 
 
-createOne(firstFrame, function(){
+createThree(firstFrame, function(){
 	setTimeout(function(){
 		frameID.remove(); 
 	}, 1500)
