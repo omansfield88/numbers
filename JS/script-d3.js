@@ -10,7 +10,17 @@ var secondFrame = d3.select("#second").append("svg")
 	            .attr("class", "svg-frame")
 	            .attr("viewBox", "0 0 253 340");
 
+var thirdFrame = d3.select("#first").append("svg")
+				.attr("width", "100%")
+	            .attr("height", "100%")
+	            .attr("class", "svg-frame")
+	            .attr("viewBox", "0 0 253 340");
 
+var fourthFrame = d3.select("#second").append("svg")
+				.attr("width", "100%")
+	            .attr("height", "100%")
+	            .attr("class", "svg-frame")
+	            .attr("viewBox", "0 0 253 340");
 
 
 
@@ -89,13 +99,11 @@ function drawLine(frameID, x1, y1, x2, y2, dashArray, dashOffset){
 
 
 function createOne(frameID){
-	// drawSlash(frameID,
-	// 		"125.8",
-	// 		"20 83.5",
-	// 		"95 127.2",
-	// 		"95 169.5",
-	// 		"20"
-	// 		);
+	drawSlash(frameID,
+			"125.8,20 125.1,21.3 168.8,21.4 169.5,20", //coordinates start
+			"125.8,20 83.5,95 127.2,95 169.5,20"      //coordinates end
+			);
+
 	drawLine(frameID,
 			"169.5", //x1
 			"20",    //y1
@@ -103,7 +111,21 @@ function createOne(frameID){
 			"320");   //y2
 }
 
+function createTwo(frameID){
+	drawBall(frameID, 
+			"95.1", //cx
+			"292",  //cy
+			"28");   //r
 
+	drawSlash(frameID, 
+			"159.4,245.3 159.4,245.4 203.1,245.4 203.1,245.3",  //coordinates start
+			"159.4,245.3 117.2,320 160.9,320 203.1,245.3"); //coordinates end
+
+	drawPath(frameID, 
+			"M35.2,133c-1.2-6.1-1.9-12.3-1.9-18.8c0-51.4,41.7-93.2,93.2-93.2s93.2,41.7,93.2,93.2 c0,17.1-4.6,33.1-12.6,46.9c0,0-89.8,158.9-89.8,158.9", //path coordinates
+			"550",  //dash array
+			"550"); //dash offset
+}
 
 
 function createThree(frameID){
@@ -122,6 +144,25 @@ function createThree(frameID){
 			"830"); //dash offset
 }
 
+function createFour(frameID){
+	drawBall(frameID, 
+			"179", //cx
+			"291.5",  //cy
+			"28");   //r
+	
+	drawSlash(frameID, 
+			"168.1,20.5 167.8,21.1 211.3,21.1 211.6,20.5",  //coordinates start
+			"168.1,20.5 41.4,244.7 84.9,244.7 211.6,20.5"); //coordinates end
+
+	drawLine(frameID,
+				"211.6", //x1
+				"20.5",    //y1
+				"211.6", //x2
+				"319.5",   //y2
+				"300",   //dash array
+				"300")   //dash offset
+
+}
 
 
 function createFive(frameID){
@@ -176,21 +217,50 @@ function createSeven(frameID){
 }
 
 
-createSix(firstFrame, function(){
+function createNine(frameID){
+	
+	drawSlash(frameID, 
+			"180.2,208.2 181,206.8 137.4,206.8 136.5,208.3",  //coordinates start
+			"117.5,319 181,206.8 137.4,206.8 74,319"); //coordinates end
+
+	drawPath(frameID, 
+				"M181,206.9l-54.5,0c-51.6,0-93.4-41.8-93.4-93.4S74.9,20,126.5,20s93.4,41.8,93.4,93.4c0,18-5.1,34.8-13.9,49	c0,0-18.1,32-23.5,41.7", //path coordinates
+				"600",  //dash array
+				"600"); //dash offset
+}
+
+// <g>
+// 		<polygon class="st3" points="117.5,319 181,206.8 137.4,206.8 74,319 		"/>
+// 	</g>
+// 	<path class="st5" d="M181,206.9l-54.5,0c-51.6,0-93.4-41.8-93.4-93.4S74.9,20,126.5,20s93.4,41.8,93.4,93.4c0,18-5.1,34.8-13.9,49
+// 		c0,0-18.1,32-23.5,41.7"/>
+
+
+createOne(firstFrame, function(){
 	setTimeout(function(){
 		frameID.remove(); 
 	}, 1500)
 	
 });
 
-createFive(secondFrame, function(){
+createTwo(secondFrame, function(){
 	setTimeout(function(){
 		frameID.remove();
-	}, 500)
+	}, 500)	
+});
+
+createSix(thirdFrame, function(){
+	setTimeout(function(){
+		frameID.remove(); 
+	}, 1500)
 	
 });
 
-
+createFive(fourthFrame, function(){
+	setTimeout(function(){
+		frameID.remove();
+	}, 500)	
+});
 
 
 	// var frame = d3.select("#second").append("svg")
