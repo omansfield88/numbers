@@ -23,6 +23,7 @@ var fourthFrame = d3.select("#second").append("svg")
 	            .attr("viewBox", "0 0 253 340");
 
 
+var theDuration = 500;
 
 
 function drawBall(frameID, cx, cy, r){	  
@@ -50,7 +51,7 @@ function drawBall(frameID, cx, cy, r){
 				.attr("fill","url(#ball-grad)");
 
 	ballGradStop1.transition()
-		.duration(500)
+		.duration(theDuration)
 		.attr("offset", "0%");
 };
 
@@ -61,7 +62,7 @@ function drawSlash(frameID, startCoOrdinates, endCoOrdinates){
 				.attr("fill", "#ffdf17");
 
 	slash.transition()
-		.duration(500)
+		.duration(theDuration)
 		.attr("points", endCoOrdinates);
 }
 
@@ -75,7 +76,7 @@ function drawPath(frameID, pathCoOrdinates, dashArray, dashOffset){
 				.attr("stroke-dashoffset", dashOffset);
 
 	path.transition()
-		.duration(500)
+		.duration(theDuration)
 		.attr("stroke-dashoffset", "0");
 }
 
@@ -92,8 +93,18 @@ function drawLine(frameID, x1, y1, x2, y2, dashArray, dashOffset){
 				.attr("stroke-dashoffset", dashOffset);
 
 	line.transition()
-		.duration(500)
+		.duration(theDuration)
 		.attr("stroke-dashoffset", "0");
+}
+
+
+
+
+function createZero(frameID){
+	drawPath(frameID, 
+			"M126.5,20c51.6,0,93.4,41.8,93.4,93.4s-41.8,93.4-93.4,93.4S33.1,165,33.1,113.4S74.9,20,126.5,20", //path coordinates
+			"590",  //dash array
+			"590"); //dash offset
 }
 
 
@@ -108,7 +119,9 @@ function createOne(frameID){
 			"169.5", //x1
 			"20",    //y1
 			"169.5", //x2
-			"320");   //y2
+			"320",   //y2
+			"300",   //dash array
+			"300");  //dash offset
 }
 
 function createTwo(frameID){
@@ -177,8 +190,8 @@ function createFive(frameID){
 
 	drawPath(frameID, 
 			"M71.9,132.6l54.5,0c51.6,0,93.4,41.8,93.4,93.4s-41.8,93.4-93.4,93.4s-93.4-41.8-93.4-93.4c0-6.4,0.6-12.6,1.9-18.7", //path coordinates
-			"830",  //dash array
-			"830"); //dash offset
+			"520",  //dash array
+			"520"); //dash offset
 }
 
 
@@ -216,6 +229,18 @@ function createSeven(frameID){
 			)
 }
 
+function createEight(frameID){
+	drawBall(frameID, 
+			"126.5", //cx
+			"48.5",  //cy
+			"28");   //r
+
+	drawPath(frameID, 
+			"M126.5,132.6c51.6,0,93.4,41.8,93.4,93.4s-41.8,93.4-93.4,93.4s-93.4-41.8-93.4-93.4S74.9,132.6,126.5,132.6", //path coordinates
+			"590",  //dash array
+			"590"); //dash offset
+}
+
 
 function createNine(frameID){
 	
@@ -236,14 +261,14 @@ function createNine(frameID){
 // 		c0,0-18.1,32-23.5,41.7"/>
 
 
-createOne(firstFrame, function(){
+createNine(firstFrame, function(){
 	setTimeout(function(){
 		frameID.remove(); 
 	}, 1500)
 	
 });
 
-createTwo(secondFrame, function(){
+createSix(secondFrame, function(){
 	setTimeout(function(){
 		frameID.remove();
 	}, 500)	
@@ -256,7 +281,7 @@ createSix(thirdFrame, function(){
 	
 });
 
-createFive(fourthFrame, function(){
+createEight(fourthFrame, function(){
 	setTimeout(function(){
 		frameID.remove();
 	}, 500)	
