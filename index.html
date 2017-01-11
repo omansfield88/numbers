@@ -8,10 +8,17 @@
 
 <style>
 	svg{
-		width: 300px;
-		margin: 20px;
-		border: 1px solid black;
+		
+		
+		/*border: 1px solid black;*/
 	}
+
+    div{
+        width: 200px;
+        margin: 10px;
+        display: inline-block;
+        border: 1px solid black;
+    }
 
 /*	circle{
 		shape-rendering: auto;
@@ -22,36 +29,39 @@
 
 <body>
 
-<div id="first"></div>
-<div id="second"></div>
+<div id="first-frame"></div>
+<div id="second-frame"></div>
+<div id="third-frame"></div>
+<div id="fourth-frame"></div>
+<div id="fifth-frame"></div>
+<div id="sixth-frame"></div>
 
-
-<div id="txt"></div>
 
 <script>
 
 
-//Get time
-function startTime() {
-    var today = new Date();
-    var h = today.getHours();
-    var m = today.getMinutes();
-    var s = today.getSeconds();
-    m = checkTime(m);
-    s = checkTime(s);
-
-
-    document.getElementById('txt').innerHTML =
-    h + ":" + m + ":" + s;
-    var t = setTimeout(startTime, 500);//Run the function again
-}
 
 
 
-function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-    return i;
-}
+// //Get time
+// function startTime() {
+//     var today = new Date();
+//     var h = today.getHours();
+//     var m = today.getMinutes();
+//     var s = today.getSeconds();
+//     m = checkTime(m);
+//     s = checkTime(s);
+
+
+//     document.getElementById('txt').innerHTML =
+//     h + ":" + m + ":" + s;
+//     var t = setTimeout(startTime, 500);//Run the function again
+// }
+
+// function checkTime(i) {
+//     if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+//     return i;
+// }
 
 </script>
 <script type="text/javascript" src="js/script-d3.js"></script>	

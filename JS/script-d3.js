@@ -1,22 +1,34 @@
-var firstFrame = d3.select("#first").append("svg")
+var firstFrame = d3.select("#first-frame").append("svg")
 				.attr("width", "100%")
 	            .attr("height", "100%")
 	            .attr("class", "svg-frame")
 	            .attr("viewBox", "0 0 253 340");
 
-var secondFrame = d3.select("#second").append("svg")
+var secondFrame = d3.select("#second-frame").append("svg")
 				.attr("width", "100%")
 	            .attr("height", "100%")
 	            .attr("class", "svg-frame")
 	            .attr("viewBox", "0 0 253 340");
 
-var thirdFrame = d3.select("#first").append("svg")
+var thirdFrame = d3.select("#third-frame").append("svg")
 				.attr("width", "100%")
 	            .attr("height", "100%")
 	            .attr("class", "svg-frame")
 	            .attr("viewBox", "0 0 253 340");
 
-var fourthFrame = d3.select("#second").append("svg")
+var fourthFrame = d3.select("#fourth-frame").append("svg")
+				.attr("width", "100%")
+	            .attr("height", "100%")
+	            .attr("class", "svg-frame")
+	            .attr("viewBox", "0 0 253 340");
+
+var fifthFrame = d3.select("#fifth-frame").append("svg")
+				.attr("width", "100%")
+	            .attr("height", "100%")
+	            .attr("class", "svg-frame")
+	            .attr("viewBox", "0 0 253 340");
+
+var sixthFrame = d3.select("#sixth-frame").append("svg")
 				.attr("width", "100%")
 	            .attr("height", "100%")
 	            .attr("class", "svg-frame")
@@ -24,7 +36,6 @@ var fourthFrame = d3.select("#second").append("svg")
 
 
 var theDuration = 500;
-
 
 function drawBall(frameID, cx, cy, r){	  
 	var ballGradDefs = frameID.append("defs");
@@ -48,7 +59,8 @@ function drawBall(frameID, cx, cy, r){
 				.attr("r", r)
 				.attr("cx", cx)
 				.attr("cy", cy)
-				.attr("fill","url(#ball-grad)");
+				.attr("fill","url(#ball-grad)")
+				.attr("opacity", 1);
 
 	ballGradStop1.transition()
 		.duration(theDuration)
@@ -59,7 +71,9 @@ function drawBall(frameID, cx, cy, r){
 function drawSlash(frameID, startCoOrdinates, endCoOrdinates){
 	var slash = frameID.append("polygon")
 				.attr("points", startCoOrdinates)
-				.attr("fill", "#ffdf17");
+				.attr("fill", "#ffdf17")
+				.attr("class", "slash")
+				.attr("opacity", 1);
 
 	slash.transition()
 		.duration(theDuration)
@@ -73,7 +87,8 @@ function drawPath(frameID, pathCoOrdinates, dashArray, dashOffset){
 				.attr("stroke", "#000000")
 				.attr("stroke-width", "1px")
 				.attr("stroke-dasharray", dashArray)
-				.attr("stroke-dashoffset", dashOffset);
+				.attr("stroke-dashoffset", dashOffset)
+				.attr("opacity", 1);
 
 	path.transition()
 		.duration(theDuration)
@@ -90,7 +105,8 @@ function drawLine(frameID, x1, y1, x2, y2, dashArray, dashOffset){
 				.attr("stroke", "#000000")
 				.attr("stroke-width", "1px")
 				.attr("stroke-dasharray", dashArray)
-				.attr("stroke-dashoffset", dashOffset);
+				.attr("stroke-dashoffset", dashOffset)
+				.attr("opacity", 1);
 
 	line.transition()
 		.duration(theDuration)
@@ -155,6 +171,7 @@ function createThree(frameID){
 			"M71.9,132.6l54.5,0c51.6,0,93.4,41.8,93.4,93.4s-41.8,93.4-93.4,93.4s-93.4-41.8-93.4-93.4c0-6.4,0.6-12.6,1.9-18.7", //path coordinates
 			"830",  //dash array
 			"830"); //dash offset
+
 }
 
 function createFour(frameID){
@@ -174,7 +191,6 @@ function createFour(frameID){
 				"319.5",   //y2
 				"300",   //dash array
 				"300")   //dash offset
-
 }
 
 
@@ -205,7 +221,6 @@ function createSix(frameID){
 			"M71.9,132.6l54.5,0c51.6,0,93.4,41.8,93.4,93.4c0,51.6-41.8,93.4-93.4,93.4s-93.4-41.8-93.4-93.4 c0-18,5.1-34.8,13.9-49c0,0,18.1-32,23.5-41.7", //path coordinates
 			"600",  //dash array
 			"600"); //dash offset
-
 }
 
 
@@ -242,8 +257,7 @@ function createEight(frameID){
 }
 
 
-function createNine(frameID){
-	
+function createNine(frameID){	
 	drawSlash(frameID, 
 			"180.2,208.2 181,206.8 137.4,206.8 136.5,208.3",  //coordinates start
 			"117.5,319 181,206.8 137.4,206.8 74,319"); //coordinates end
@@ -254,38 +268,248 @@ function createNine(frameID){
 				"600"); //dash offset
 }
 
-// <g>
-// 		<polygon class="st3" points="117.5,319 181,206.8 137.4,206.8 74,319 		"/>
-// 	</g>
-// 	<path class="st5" d="M181,206.9l-54.5,0c-51.6,0-93.4-41.8-93.4-93.4S74.9,20,126.5,20s93.4,41.8,93.4,93.4c0,18-5.1,34.8-13.9,49
-// 		c0,0-18.1,32-23.5,41.7"/>
 
 
-createNine(firstFrame, function(){
+//Remove all SVG shapes after a certain time
+function removeShapes(frameID){
+	frameID.selectAll("polygon, path, line, circle, defs").transition()
+												.duration(200)
+												.attr("opacity", "0");
+
 	setTimeout(function(){
-		frameID.remove(); 
-	}, 1500)
+		frameID.selectAll("polygon, path, line, circle, defs").remove();
+	}, 200);
+}
+
+
+
+
+//Create object outside of the getTime function so it can be accessed outside of the function
+var currentTime = {};
+
+function getTime(){
+    var theDate = new Date();
+
+    var hours = theDate.getHours();
+    var minutes = theDate.getMinutes();
+    var seconds = theDate.getSeconds();
+    hours = checkTime(hours);
+    minutes = checkTime(minutes);
+    seconds = checkTime(seconds);
+
+    //Because one second will return as 1 rather than 01,
+    //need to add a 0 to any second less than 10,
+    //or there'll only be 1 digit to push to the array
+    function checkTime(i){
+        if (i < 10){
+            i = "0" + i;
+            return i;
+        } else{
+            return i;
+        }
+    }
+
+    //turn interger into array with two values. 21 --> [2,1]
+    var hours = hours.toString().split("").map(Number);
+    var minutes = minutes.toString().split("").map(Number);
+    var seconds = seconds.toString().split("").map(Number);
+
+    //store split intergers from array into the object which you'll access later
+    currentTime.hourOne = hours[0];
+    currentTime.hourTwo = hours[1];
+    currentTime.minuteOne = minutes[0];
+    currentTime.minuteTwo = minutes[1];
+    currentTime.secondOne = seconds[0];
+    currentTime.secondTwo = seconds[1];
+};
+
+
+
+//num becomes currentNum from refresh()
+function drawNumber(num, frameID){
+	if (num == 0){
+		createZero(frameID)
+	}
+	else if (num == 1){
+		createOne(frameID)
+	}
+	else if (num == 2){
+		createTwo(frameID)
+	}
+	else if (num == 3){
+		createThree(frameID)
+	}
+	else if (num == 4){
+		createFour(frameID)
+	}
+	else if (num == 5){
+		createFive(frameID)
+	}
+	else if (num == 6){
+		createSix(frameID)
+	}
+	else if (num == 7){
+		createSeven(frameID)
+	}
+	else if (num == 8){
+		createEight(frameID)
+	}
+	else if (num == 9){
+		createNine(frameID)
+	}
+}
+
+
+
+//Get present time, store the number you want in a var, draw the number. 
+//Every second, get the present time, store the number you want to display in currentNum.
+//If currentNum is the same as previousNum not enough time has passed,
+//so do nothing. Leave the last drawn shape where it is.
+//If currentNum is no longer the same as previousNum, that means a second,
+//minute or hour has passed and the last drawn shape needs to be removed and the new one drawn.
+//removeShapes() takes 200ms before it .removes() the SVG shapes, so a 201ms timeOut()
+//is needed to ensure the new shapes are drawn AFTER removeShapes() is done.
+//Finally, set previousNum to the value of currentNum so the next second when the
+//if statement checks again, the two values are the same and no drawing code will be
+//executed until the currentNum changes again.
+
+function refresh(frameID){
 	
-});
+	getTime();
+	var previousNum = currentTime["secondTwo"];
+	drawNumber(previousNum, frameID);
 
-createSix(secondFrame, function(){
-	setTimeout(function(){
-		frameID.remove();
-	}, 500)	
-});
+	setInterval(function(){	
+		getTime();
+		var currentNum = currentTime["secondTwo"];
 
-createSix(thirdFrame, function(){
-	setTimeout(function(){
-		frameID.remove(); 
-	}, 1500)
+		if(currentNum !== previousNum){			
+			removeShapes(frameID); //takes 200ms to remove
+			setTimeout(function(){
+				drawNumber(currentNum, frameID);			
+			}, 201)
+		}
+
+		previousNum = currentNum;				
+	}, 1000)
+
+}
+
+//TODO - Put currentTime.secondTwo as an agurment here somehow
+refresh(sixthFrame);
+
+
+
+
+
+// function refresh2(){
+
+// 	getTime();
+// 	var initialNum = currentTime.secondTwo;
+// 	drawNumber(initialNum, secondFrame);
+
+// 	setInterval(function(){		
+
+// 		getTime();
+// 		var currentNum = currentTime.secondTwo;	
+
+// 		if(currentNum !== initialNum){			
+// 			removeShapes(secondFrame);
+
+// 			setTimeout(function(){
+// 				drawNumber(currentNum, secondFrame);			
+// 			},201)
+// 		}
+
+// 		initialNum = currentNum;				
+		
+// 	}, 1000)
+
+// }
+
+
+
+// refresh2();
+
+
+
+
+
+
+
+
+
+
+// function refresh1(){
+
+// 	setInterval(function() {
+
+// 		var previousNumber;
+// 		var currentNumber = currentTime.secondOne;
+
+// 		if (previousNumber != currentNumber){
+// 			drawNumber(currentNumber, firstFrame);
+// 		} 
+
+// 		else{
+// 			drawNumber(currentNumber, firstFrame);
+
+// 			setTimeout(function(){		
+// 				removeShapes(firstFrame);
+// 			},700)
+// 		}
+		
+// 	}, 1000)
+
+// };
+
+
+
+
+
+//FIRST FRAME
+// setInterval(function(){
 	
-});
+// 	createNine(firstFrame);
 
-createEight(fourthFrame, function(){
-	setTimeout(function(){
-		frameID.remove();
-	}, 500)	
-});
+// 	setTimeout(function(){		
+// 		removeShapes(firstFrame);
+// 	},700)	
+
+// }, 1000);
+
+// //SECOND FRAME
+// setInterval(function(){
+	
+// 	createOne(secondFrame);
+
+// 	setTimeout(function(){		
+// 		removeShapes(secondFrame);
+// 	},700)
+
+// }, 1000);
+
+// //THIRD FRAME
+// setInterval(function(){
+	
+// 	createThree(thirdFrame);
+
+// 	setTimeout(function(){		
+// 		removeShapes(thirdFrame);
+// 	},700)
+
+// }, 1000);
+
+// //FOURTH FRAME
+// setInterval(function(){
+	
+// 	createZero(fourthFrame);
+
+// 	setTimeout(function(){		
+// 		removeShapes(fourthFrame);
+// 	},700)
+
+// }, 1000);
 
 
 	// var frame = d3.select("#second").append("svg")
