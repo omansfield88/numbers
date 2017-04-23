@@ -54,7 +54,6 @@ var sixthFrame = d3.select("#sixth-frame").append("svg")
 
 //Colours//
 
-var colour1 = "#ff6868";
 var strokeWeight = "3px";
 
 // function defGoldGrad(frameID){
@@ -140,7 +139,7 @@ var colours = [
 		digitColour: "#866c3d"
 	},
 	{
-		backgroundColour: "4aa7ed",
+		backgroundColour: "#4aa7ed",
 		digitColour: "#ffbdb0"
 	},
 	{
@@ -164,42 +163,238 @@ var colours = [
 		digitColour: "#ff7155"
 	},
 
-	
+
+
+
+	{
+		backgroundColour: "#b1f2dc",
+		digitColour: "#ff876e"
+	},
+	{
+		backgroundColour: "#c5ed78",
+		digitColour: "#a26ef2"
+	},
+	{
+		backgroundColour: "#83db6e",
+		digitColour: "#5a68b2"
+	},
+	{
+		backgroundColour: "#aae032",
+		digitColour: "#f376a3"
+	},
+	{
+		backgroundColour: "#bbefaf",
+		digitColour: "#6fa1a2"
+	},
+	{
+		backgroundColour: "#53a05e",
+		digitColour: "#f4d1a9"
+	},
+	{
+		backgroundColour: "#84adaa",
+		digitColour: "#fae9b2"
+	},
+	{
+		backgroundColour: "#488c9b",
+		digitColour: "#e8d260"
+	},
+	{
+		backgroundColour: "#84ad8d",
+		digitColour: "#ecfce7"
+	},
+	{
+		backgroundColour: "#597d57",
+		digitColour: "#eac1cf"
+	},
+
+
+
+
+	{
+		backgroundColour: "#ffe67a",
+		digitColour: "#ff7a93"
+	},
+	{
+		backgroundColour: "#f2edbd",
+		digitColour: "#7dbce5"
+	},
+	{
+		backgroundColour: "#fcfc5b",
+		digitColour: "#7e7e7e"
+	},
+	{
+		backgroundColour: "#fceb4c",
+		digitColour: "#6175ff"
+	},
+	{
+		backgroundColour: "#ffd522",
+		digitColour: "#ff8c46"
+	},
+	{
+		backgroundColour: "#ffdd4e",
+		digitColour: "#0086ac"
+	},
+	{
+		backgroundColour: "#f9e02b",
+		digitColour: "#f9792b"
+	},
+	{
+		backgroundColour: "#ffc82e",
+		digitColour: "#2e65ff"
+	},
+	{
+		backgroundColour: "#fdff91",
+		digitColour: "#265e28"
+	},
+	{
+		backgroundColour: "#fbff7b",
+		digitColour: "#ff7f7b"
+	},
+
+
+	{
+		backgroundColour: "#ffe092",
+		digitColour: "#6f8f5e"
+	},
+	{
+		backgroundColour: "#ffa143",
+		digitColour: "#87ffe1"
+	},
+	{
+		backgroundColour: "#f7d92b",
+		digitColour: "#4c62fa"
+	},
+	{
+		backgroundColour: "#ffb666",
+		digitColour: "#865928"
+	},
+	{
+		backgroundColour: "#f68b1f",
+		digitColour: "#f7df9d"
+	},
+	{
+		backgroundColour: "#f9bd16",
+		digitColour: "#424242"
+	},
+	{
+		backgroundColour: "#f58337",
+		digitColour: "#86ffc6"
+	},
+	{
+		backgroundColour: "#ffdbb3",
+		digitColour: "#ffffff"
+	},
+	{
+		backgroundColour: "#dbb352",
+		digitColour: "#eeffac"
+	},
+	{
+		backgroundColour: "#ffd966",
+		digitColour: "#a892c2"
+	},
+
+
+	{
+		backgroundColour: "#f9c2c2",
+		digitColour: "#ff5454"
+	},
+	{
+		backgroundColour: "#9999ff",
+		digitColour: "#fff370"
+	},
+	{
+		backgroundColour: "#fd92ad",
+		digitColour: "#a8fdaa"
+	},
+	{
+		backgroundColour: "#c297c2",
+		digitColour: "#f5ea75"
+	},
+	{
+		backgroundColour: "#e28fc8",
+		digitColour: "#b7edc8"
+	},
+	{
+		backgroundColour: "#ffb983",
+		digitColour: "#676bbd"
+	},
+	{
+		backgroundColour: "#d7d4cd",
+		digitColour: "#535464"
+	},
+	{
+		backgroundColour: "#bcbcbc",
+		digitColour: "#dbf5ca"
+	},
+	{
+		backgroundColour: "#000000",
+		digitColour: "#ffd522"
+	},
+	{
+		backgroundColour: "#ffffff",
+		digitColour: "#ff5a5a"
+	},
+
+
 
 ]
 
-
-
-
 function changeColours(frame, digitColour, backgroundColour) {
-	firstFrame.selectAll("polygon").transition()
+	frame.selectAll("polygon, circle").transition()
 									.duration(200)
 									.attr("fill", "" + digitColour + "");
+	frame.selectAll("path, line").transition()
+									.duration(200)
+									.attr("stroke", "" + digitColour + "");
 
 	document.getElementById("page-container").style.background = "" + backgroundColour + "";
 }
 
 
 
-var i = 0;
+// var i = 0;
 
-function colourChangeLoop() {
-	setTimeout(function (){
-		console.log("ues");
-		changeColours(firstFrame, colours[i].digitColour, colours[i].backgroundColour);
-		i++;
-		if (i < colours.length){
-			colourChangeLoop()
-		}
-	}, 1000)
+// function colourChangeLoop() {
+// 	setTimeout(function (){
+// 		console.log("ues");
+// 		changeColours(firstFrame, colours[i].digitColour, colours[i].backgroundColour);
+// 		i++;
+// 		if (i < colours.length){
+// 			colourChangeLoop()
+// 		}
+// 	}, 1000)
+// }
+// colourChangeLoop();
+
+
+
+//Define default colour
+//Get random colour from colours array
+//set currentColour to that value in the array so it can be accessed outside of the function
+
+var currentColour = "#8dffaa";
+
+function getNewColour(){
+	var currentColourIndex = Math.floor(Math.random() * colours.length) + 0;
+	changeColours(firstFrame, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+	changeColours(secondFrame, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+	changeColours(thirdFrame, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+	changeColours(fourthFrame, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+	changeColours(fifthFrame, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+	changeColours(sixthFrame, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+
+	changeColours(dividerOne, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+	changeColours(dividerTwo, colours[currentColourIndex].digitColour, colours[currentColourIndex].backgroundColour);
+
+	currentColour = colours[currentColourIndex].digitColour;
 }
-colourChangeLoop();
 
 
 
-// setTimeout(function(){
-// 	changeColours(firstFrame, colours[0].digitColour, colours[0].backgroundColour);
-// },1000)
+setInterval(function(){
+	getNewColour();
+},1000)
+
 
 
 
@@ -207,33 +402,36 @@ colourChangeLoop();
 var theDuration = 500;
 
 function drawBall(frameID, cx, cy, r){
-	var ballGradDefs = frameID.append("defs");
-	var ballGradRadialGrad = ballGradDefs.append("radialGradient")
-							.attr("id", "ball-grad")
-							.attr("cx", "50%")
-							.attr("cy", "50%")
-							.attr("r", "100%")
-							.attr("fx", "50%")
-							.attr("fy", "50%");
-	var ballGradStop1 = ballGradRadialGrad.append("stop")
-						.attr("offset", "49%")
-						.attr("stop-color", colour1)
-						.attr("stop-opacity", "0");
-	var ballGradStop2 = ballGradRadialGrad.append("stop")
-						.attr("offset", "0%")
-						.attr("stop-color", colour1)
-						.attr("stop-opacity", "1");
+
+	// var ballGradDefs = frameID.append("defs");
+	// var ballGradRadialGrad = ballGradDefs.append("radialGradient")
+	// 						.attr("id", "ball-grad")
+	// 						.attr("cx", "50%")
+	// 						.attr("cy", "50%")
+	// 						.attr("r", "100%")
+	// 						.attr("fx", "50%")
+	// 						.attr("fy", "50%");
+	// var ballGradStop1 = ballGradRadialGrad.append("stop")
+	// 					.attr("offset", "49%")
+	// 					.attr("stop-color", currentColour)
+	// 					.attr("stop-opacity", "0");
+	// var ballGradStop2 = ballGradRadialGrad.append("stop")
+	// 					.attr("offset", "0%")
+	// 					.attr("stop-color", currentColour)
+	// 					.attr("stop-opacity", "1");
 
 	var ball = frameID.append("circle")
-				.attr("r", r)
+				.attr("r", 0)
 				.attr("cx", cx)
 				.attr("cy", cy)
-				.attr("fill","url(#ball-grad)")
+				.attr("fill", currentColour)
+				// .attr("fill","url(#ball-grad)")
 				.attr("opacity", 1);
 
-	ballGradStop1.transition()
+	ball.transition()
 		.duration(theDuration)
-		.attr("offset", "0%");
+		.attr("r", r);
+
 };
 
 
@@ -242,7 +440,7 @@ function drawSlash(frameID, startCoOrdinates, endCoOrdinates){
 
 	var slash = frameID.append("polygon")
 				.attr("points", startCoOrdinates)
-				.attr("fill", colour1)
+				.attr("fill", currentColour)
 				.attr("class", "slash")
 				.attr("opacity", 1);
 
@@ -255,7 +453,7 @@ function drawPath(frameID, pathCoOrdinates, dashArray, dashOffset){
 	var path = frameID.append("path")
 				.attr("d", pathCoOrdinates)
 				.attr("fill", "none")
-				.attr("stroke", colour1)
+				.attr("stroke", currentColour)
 				.attr("stroke-width", strokeWeight)
 				.attr("stroke-dasharray", dashArray)
 				.attr("stroke-dashoffset", dashOffset)
@@ -273,7 +471,7 @@ function drawLine(frameID, x1, y1, x2, y2, dashArray, dashOffset){
 				.attr("x2", x2)
 				.attr("y2", y2)
 				.attr("fill", "none")
-				.attr("stroke", colour1)
+				.attr("stroke", currentColour)
 				.attr("stroke-width", strokeWeight)
 				.attr("stroke-dasharray", dashArray)
 				.attr("stroke-dashoffset", dashOffset)
